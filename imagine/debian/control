@@ -10,7 +10,7 @@ Build-Depends:
  ninja-build,
  git,
  mold,
- cmake,
+ cmake (>= 4.1),
  libx11-dev,
  libxi-dev,
  libxrandr-dev,
