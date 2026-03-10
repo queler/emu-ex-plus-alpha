@@ -1,0 +1,49 @@
+Source: emu-ex-plus-alpha-imagine
+Section: games
+Priority: optional
+Maintainer: Adam Queler <you@example.invalid>
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+Build-Depends:
+ debhelper-compat (= 13),
+ build-essential,
+ pkgconf | pkg-config,
+ ninja-build,
+ git,
+ cmake (>= 4.1),
+ clang-18,
+ lld-18,
+ libc++-18-dev,
+ libc++abi-18-dev,
+ libx11-dev,
+ libxi-dev,
+ libxrandr-dev,
+ libxinerama-dev,
+ libxcursor-dev,
+ libgl-dev,
+ libegl-dev,
+ libgles-dev | libgles2-mesa-dev,
+ libasound2-dev,
+ libpng-dev,
+ zlib1g-dev,
+ libminizip-dev,
+ libbluetooth-dev,
+ libfreetype-dev,
+ libfontconfig1-dev,
+ libdbus-1-dev,
+ libglib2.0-dev,
+ libdrm-dev,
+ libxcb-xfixes0-dev,
+ libxcb-xinput-dev,
+ libxcb-icccm4-dev,
+ libxkbcommon-dev,
+ libxkbcommon-x11-dev,
+ libxcb-randr0-dev,
+ libpulse-dev,
+ liblzma-dev
+
+Package: emu-ex-plus-alpha-imagine
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: personal experimental package for building emu-ex-plus-alpha
+ Personal packaging skeleton used to discover build dependencies.
