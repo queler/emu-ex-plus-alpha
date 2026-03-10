@@ -13,6 +13,7 @@
 	You should have received a copy of the GNU General Public License
 	along with C64.emu.  If not, see <http://www.gnu.org/licenses/> */
 
+#include <imagine/logger/logger.h>
 extern "C"
 {
 	#include "log.h"
@@ -20,13 +21,18 @@ extern "C"
 	#include "uimon.h"
 	#include "archdep.h"
 }
-
-#include <imagine/logger/logger.h>
 import imagine;
 
-int log_message(log_t, const char *format, ...)
+using namespace IG;
+
+// In release builds these are defined as dummy functions in pluginCommon.c
+
+extern "C"
 {
-	if(!IG::Log::isEnabled())
+
+int log_message(log_t, const char* format, ...)
+{
+	if(!Log::isEnabled())
 		return 0;
 	va_list ap;
 	va_start(ap, format);
@@ -36,9 +42,9 @@ int log_message(log_t, const char *format, ...)
 	return 0;
 }
 
-int log_warning(log_t, const char *format, ...)
+int log_warning(log_t, const char* format, ...)
 {
-	if(!IG::Log::isEnabled())
+	if(!Log::isEnabled())
 		return 0;
 	va_list ap;
 	va_start(ap, format);
@@ -48,9 +54,9 @@ int log_warning(log_t, const char *format, ...)
 	return 0;
 }
 
-int log_error(log_t, const char *format, ...)
+int log_error(log_t, const char* format, ...)
 {
-	if(!IG::Log::isEnabled())
+	if(!Log::isEnabled())
 		return 0;
 	va_list ap;
 	va_start(ap, format);
@@ -60,9 +66,9 @@ int log_error(log_t, const char *format, ...)
 	return 0;
 }
 
-int log_debug(log_t, const char *format, ...)
+int log_debug(log_t, const char* format, ...)
 {
-	if(!IG::Log::isEnabled())
+	if(!Log::isEnabled())
 		return 0;
 	va_list ap;
 	va_start(ap, format);
@@ -72,9 +78,9 @@ int log_debug(log_t, const char *format, ...)
 	return 0;
 }
 
-int log_verbose(log_t, const char *format, ...)
+int log_verbose(log_t, const char* format, ...)
 {
-	if(!IG::Log::isEnabled())
+	if(!Log::isEnabled())
 		return 0;
 	va_list ap;
 	va_start(ap, format);
@@ -84,9 +90,9 @@ int log_verbose(log_t, const char *format, ...)
 	return 0;
 }
 
-int log_printf(const char *format, ...)
+int log_printf(const char* format, ...)
 {
-	if(!IG::Log::isEnabled())
+	if(!Log::isEnabled())
 		return 0;
 	va_list ap;
 	va_start(ap, format);
@@ -96,9 +102,9 @@ int log_printf(const char *format, ...)
 	return 0;
 }
 
-CLINK void archdep_startup_log_error(const char *format, ...)
+void archdep_startup_log_error(const char* format, ...)
 {
-	if(!IG::Log::isEnabled())
+	if(!Log::isEnabled())
 		return;
 	va_list ap;
 	va_start(ap, format);
@@ -106,9 +112,9 @@ CLINK void archdep_startup_log_error(const char *format, ...)
 	va_end(ap);
 }
 
-CLINK void ui_error(const char *format,...)
+void ui_error(const char* format,...)
 {
-	if(!IG::Log::isEnabled())
+	if(!Log::isEnabled())
 		return;
   va_list ap;
   va_start(ap, format);
@@ -116,32 +122,34 @@ CLINK void ui_error(const char *format,...)
   va_end(ap);
 }
 
-CLINK int uimon_out(const char *buffer)
+int uimon_out(const char* buffer)
 {
 	logger_printf(0, "uimon_out: %s", buffer);
 	return 0;
 }
 
-CLINK int uimon_petscii_out(const char *buffer, int len)
+int uimon_petscii_out(const char* buffer, int len)
 {
 	logger_printf(0, "uimon_petscii_out: %s", buffer);
 	return 0;
 }
 
-CLINK int uimon_petscii_upper_out(const char *buffer, int len)
+int uimon_petscii_upper_out(const char* buffer, int len)
 {
 	logger_printf(0, "uimon_petscii_upper_out: %s", buffer);
 	return 0;
 }
 
-CLINK int uimon_scrcode_out(const char *buffer, int len)
+int uimon_scrcode_out(const char* buffer, int len)
 {
 	logger_printf(0, "uimon_scrcode_out: %s", buffer);
 	return 0;
 }
 
-CLINK int uimon_scrcode_upper_out(const char *buffer, int len)
+int uimon_scrcode_upper_out(const char* buffer, int len)
 {
 	logger_printf(0, "uimon_scrcode_upper_out: %s", buffer);
 	return 0;
+}
+
 }

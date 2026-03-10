@@ -12,7 +12,7 @@ addPkgConfigDepMultiConfig(c64emu emuframework)
 addCxxModules(c64emu emuex imagine)
 evalPkgConfigFlags(c64emu all)
 
-setExportedSymbols(c64emu
+set(exportedSymbols
 	archdep_default_rtc_file_name
 	archdep_file_size
 	kbd_arch_keyname_to_keynum
@@ -31,6 +31,25 @@ setExportedSymbols(c64emu
 	vsyncarch_refresh_frequency_changed
 	vsync_do_vsync2
 	zfile_fopen
+)
+
+setExportedSymbols(c64emu release ${exportedSymbols})
+
+setExportedSymbols(c64emu debug
+	${exportedSymbols}
+	log_message
+	log_warning
+	log_error
+	log_debug
+	log_verbose
+	log_printf
+	archdep_startup_log_error
+	ui_error
+	uimon_out
+	uimon_petscii_out
+	uimon_petscii_upper_out
+	uimon_scrcode_out
+	uimon_scrcode_upper_out
 )
 
 add_library(c64emuInterface INTERFACE)
@@ -102,6 +121,10 @@ target_compile_options(c64emuInterface INTERFACE
 	-Wno-unused-parameter
 	-Wno-unused-function
 )
+
+if(CMAKE_C_COMPILER_ID MATCHES "GNU")
+	target_compile_options(c64emuInterface INTERFACE $<$<COMPILE_LANGUAGE:CXX>:-Wno-global-module>)
+endif()
 
 target_link_libraries(c64emu PRIVATE c64emuInterface)
 add_subdirectory(src)

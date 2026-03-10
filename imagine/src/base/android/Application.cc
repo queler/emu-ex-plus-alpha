@@ -14,8 +14,10 @@
 	along with Imagine.  If not, see <http://www.gnu.org/licenses/> */
 
 #include <imagine/base/Application.hh>
+#include <imagine/fs/FS.hh>
 #include <imagine/util/ScopeGuard.hh>
 #include <imagine/util/utility.hh>
+#include <imagine/util/format.hh>
 #include <imagine/logger/SystemLogger.hh>
 #include <android/window.h>
 #include <android/configuration.h>
@@ -783,9 +785,7 @@ void abort(const char* msg)
 	__android_log_assert("", "imagine", "%s", msg);
 }
 
-}
-
-extern "C" void LVISIBLE ANativeActivity_onCreate(ANativeActivity* nActivity, [[maybe_unused]] void* savedState, [[maybe_unused]] size_t savedStateSize)
+void AndroidApplication::main(ANativeActivity* nActivity, [[maybe_unused]] void* savedState, [[maybe_unused]] size_t savedStateSize)
 {
 	using namespace IG;
 	if(Config::DEBUG_BUILD)
@@ -802,4 +802,6 @@ extern "C" void LVISIBLE ANativeActivity_onCreate(ANativeActivity* nActivity, [[
 		if(!ctx.windows().size())
 			IG::log.warn("didn't create a window");
 	}
+}
+
 }

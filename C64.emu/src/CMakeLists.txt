@@ -1,5 +1,11 @@
+target_sources(c64emu PRIVATE FILE_SET CXX_MODULES
+	BASE_DIRS main
+	FILES main/system.ccm main/plugin.ccm
+)
+
 target_sources(c64emu PRIVATE
 	main/Main.cc
+	main/AppMeta.cc
 	main/options.cc
 	main/input.cc
 	main/EmuMenuViews.cc
@@ -8,8 +14,8 @@ target_sources(c64emu PRIVATE
 	main/sysfile.cc
 	main/video.cc
 	main/sound.cc
-	main/log.cc
 	main/zfile.cc
+	$<$<CONFIG:Debug>:${CMAKE_CURRENT_SOURCE_DIR}/main/log.cc>
 )
 
 function(addObjectLib target prefix)

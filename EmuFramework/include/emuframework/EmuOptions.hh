@@ -27,6 +27,8 @@
 namespace EmuEx
 {
 
+using namespace IG;
+
 // TODO: recycle obsolete enums
 enum ConfigKey { CFGKEY_SOUND = 0, CFGKEY_TOUCH_CONTROL_DISPLAY = 1,
 	CFGKEY_AUTOSAVE_TIMER_MINS = 2, CFGKEY_LAST_DIR = 3, CFGKEY_TOUCH_CONTROL_VIRBRATE = 4,
@@ -89,6 +91,7 @@ enum ConfigKey { CFGKEY_SOUND = 0, CFGKEY_TOUCH_CONTROL_DISPLAY = 1,
 	CFGKEY_REWIND_STATES = 118, CFGKEY_REWIND_TIMER_SECS = 119,
 	CFGKEY_FRAME_CLOCK = 120, CFGKEY_INPUT_DEVICE_CONTENT_CONFIGS = 121,
 	CFGKEY_SHOW_FRAME_TIMING_STATS = 122, CFGKEY_OUTPUT_FRAME_RATE_MODE = 123,
+	CFGKEY_SAVE_STATE_SLOT = 124,
 	// 256+ is reserved
 };
 
@@ -139,9 +142,9 @@ inline constexpr bool imageEffectPixelFormatIsValid(const auto &v)
 {
 	switch(v)
 	{
-		case IG::PixelFmtUnset:
-		case IG::PixelFmtRGB565:
-		case IG::PixelFmtRGBA8888:
+		case PixelFmtUnset:
+		case PixelFmtRGB565:
+		case PixelFmtRGBA8888:
 			return true;
 		default:
 			return false;
@@ -160,32 +163,21 @@ constexpr bool isValidWithMinMax(const auto &v)
 	return v >= min && v <= max;
 }
 
-inline constexpr bool windowPixelFormatIsValid(const IG::PixelFormat &v)
+inline constexpr bool windowPixelFormatIsValid(const PixelFormat &v)
 {
 	switch(v)
 	{
-		case IG::PixelFmtUnset:
-		case IG::PixelFmtRGB565:
-		case IG::PixelFmtRGBA8888:
+		case PixelFmtUnset:
+		case PixelFmtRGB565:
+		case PixelFmtRGBA8888:
 			return true;
 		default: return false;
 	}
 }
 
-inline constexpr bool renderPixelFormatIsValid(const auto &v)
+inline constexpr bool renderPixelFormatIsValid(const PixelFormat& v)
 {
 	return windowPixelFormatIsValid(v);
 }
-
-}
-
-namespace IG
-{
-
-template<>
-inline constexpr bool isValidProperty(const EmuEx::AutoTristate &v) { return unsigned(v) <= 2; }
-
-template<>
-inline constexpr bool isValidProperty(const EmuEx::InEmuTristate &v) { return unsigned(v) <= 2; }
 
 }
