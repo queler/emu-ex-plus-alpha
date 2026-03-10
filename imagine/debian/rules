@@ -1,16 +1,14 @@
 #!/usr/bin/make -f
-
+export IMAGINE_PATH := $(CURDIR)
 %:
 	dh $@
 
 override_dh_auto_configure:
-	:
-
-override_dh_auto_build:
-	# replace this with the command you are testing
 	cmake --preset linux-x86_64
 
+override_dh_auto_build:
+	cmake --build build/linux-x86_64
+
 override_dh_auto_install:
-	mkdir -p debian/emu-ex-plus-alpha/usr/bin
-	# placeholder until the real output path is known
-	# install -m755 path/to/binary debian/emu-ex-plus-alpha/usr/bin/gbc-emu
+	mkdir -p debian/emu-ex-plus-alpha-imagine/usr/bin
+	# install -m755 path/to/output debian/emu-ex-plus-alpha-imagine/usr/bin/

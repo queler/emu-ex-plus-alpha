@@ -26,7 +26,17 @@ Build-Depends:
  libbluetooth-dev,
  libfreetype-dev,
  libfontconfig1-dev,
- libdbus-1-dev
+ libdbus-1-dev,
+ libglib2.0-dev,
+ libdrm-dev,
+ libxcb-xfixes0-dev,
+ libxcb-xinput-dev,
+ libxcb-icccm4-dev,
+ libxkbcommon-dev,
+ libxkbcommon-x11-dev,
+ libxcb-randr0-dev,
+ libpulse-dev,
+ liblzma-dev
 Rules-Requires-Root: no
 
 Package: emu-ex-plus-alpha-imagine
