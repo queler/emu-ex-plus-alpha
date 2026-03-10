@@ -8,8 +8,17 @@ endif()
 
 string(APPEND CFLAGS_COMMON " -D_GNU_SOURCE")
 string(APPEND CFLAGS_CODEGEN " -pthread")
-string(APPEND LDFLAGS " -lm -fuse-ld=mold \
--Wl,-O3,--gc-sections,--as-needed,--icf=all,--exclude-libs=ALL,--pack-dyn-relocs=${PACK_DYN_RELOCS}")
+
+set(LINUX_LINKER_FLAGS "")
+set(LINUX_LINKER_OPTS "-Wl,--gc-sections,--as-needed")
+find_program(MOLD_PROGRAM NAMES mold)
+if(MOLD_PROGRAM)
+	set(LINUX_LINKER_FLAGS "-fuse-ld=mold")
+	set(LINUX_LINKER_OPTS "-Wl,-O3,--gc-sections,--as-needed,--icf=all,--exclude-libs=ALL,--pack-dyn-relocs=${PACK_DYN_RELOCS}")
+else()
+	message(STATUS "mold linker not found; using default system linker")
+endif()
+string(APPEND LDFLAGS " -lm ${LINUX_LINKER_FLAGS} ${LINUX_LINKER_OPTS}")
 
 if(NOT CMAKE_C_COMPILER)
 	find_program(LINUX_CC NAMES ${CTARGET}-gcc-16 gcc-16)
