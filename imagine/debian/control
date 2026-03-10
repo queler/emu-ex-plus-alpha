@@ -40,8 +40,7 @@ Build-Depends:
  libxkbcommon-x11-dev,
  libxcb-randr0-dev,
  libpulse-dev,
- liblzma-dev,
- libarchive-dev
+ liblzma-dev
 
 Package: emu-ex-plus-alpha-imagine
 Architecture: any
