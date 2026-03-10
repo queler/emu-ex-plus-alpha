@@ -10,7 +10,7 @@ override_dh_auto_configure:
 	rm -rf build/linux-x86_64
 	echo "IMAGINE_PATH=$(IMAGINE_PATH)"
 	echo "IMAGINE_SDK_PATH=$(IMAGINE_SDK_PATH)"
-	cmake --preset linux-x86_64
+	cmake --preset linux-x86_64 -DCMAKE_C_COMPILER=clang-21 -DCMAKE_CXX_COMPILER=clang-21
 	
 override_dh_autobuild:
 	cmake --build build/linux-x86_64
