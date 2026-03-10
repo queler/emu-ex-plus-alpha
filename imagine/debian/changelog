@@ -1,0 +1,5 @@
+emu-ex-plus-alpha-imagine (0~git1-1) noble; urgency=medium
+
+  * Initial experimental packaging skeleton.
+
+ -- Adam Queler <you@example.invalid>  Mon, 09 Mar 2026 12:00:00 -0400
