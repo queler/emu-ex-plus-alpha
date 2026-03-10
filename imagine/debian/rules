@@ -1,6 +1,5 @@
 #!/usr/bin/make -f
 export IMAGINE_PATH := $(CURDIR)
-export IMAGINE_PATH := $(CURDIR)
 export IMAGINE_SDK_PATH := $(CURDIR)/imagine-sdk
 
 %:
@@ -8,12 +7,13 @@ export IMAGINE_SDK_PATH := $(CURDIR)/imagine-sdk
 
 override_dh_auto_configure:
 	rm -rf build/linux-x86_64
-	echo "IMAGINE_PATH=$(IMAGINE_PATH)"
-	echo "IMAGINE_SDK_PATH=$(IMAGINE_SDK_PATH)"
-	cmake --preset linux-x86_64 -DCMAKE_C_COMPILER=clang-21 -DCMAKE_CXX_COMPILER=clang-21
-	
-override_dh_autobuild:
+	cmake --preset linux-x86_64 \
+		-DCMAKE_C_COMPILER=clang-21 \
+		-DCMAKE_CXX_COMPILER=clang++-21
+
+override_dh_auto_build:
 	cmake --build build/linux-x86_64
 
 override_dh_auto_install:
 	mkdir -p debian/emu-ex-plus-alpha-imagine/usr/bin
+	# install -m 755 build/linux-x86_64/path/to/binary debian/emu-ex-plus-alpha-imagine/usr/bin/ls
