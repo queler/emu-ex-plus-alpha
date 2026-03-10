@@ -3,14 +3,18 @@ Section: games
 Priority: optional
 Maintainer: Adam Queler <you@example.invalid>
 Standards-Version: 4.7.0
+Rules-Requires-Root: no
 Build-Depends:
  debhelper-compat (= 13),
  build-essential,
  pkgconf | pkg-config,
  ninja-build,
  git,
- mold,
  cmake (>= 4.1),
+ clang-18,
+ lld-18,
+ libc++-18-dev,
+ libc++abi-18-dev,
  libx11-dev,
  libxi-dev,
  libxrandr-dev,
@@ -37,7 +41,6 @@ Build-Depends:
  libxcb-randr0-dev,
  libpulse-dev,
  liblzma-dev
-Rules-Requires-Root: no
 
 Package: emu-ex-plus-alpha-imagine
 Architecture: any

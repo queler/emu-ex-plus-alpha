@@ -1,13 +1,16 @@
 #!/usr/bin/make -f
 export IMAGINE_PATH := $(CURDIR)
+export CC := clang-18
+export CXX := clang++-18
+
 %:
 	dh $@
 
 override_dh_auto_configure:
-	cmake --preset linux-x86_64 -DCMAKE_CXX_SCAN_FOR_MODULES=OFF
+	cmake --preset linux-x86_64
 
 override_dh_auto_build:
-	cmake --build build/linux-x86_64 -DCMAKE_CXX_SCAN_FOR_MODULES=OFF
+	cmake --build build/linux-x86_64
 
 override_dh_auto_install:
 	mkdir -p debian/emu-ex-plus-alpha-imagine/usr/bin
