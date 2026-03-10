@@ -12,8 +12,8 @@ string(APPEND LDFLAGS " -lm -fuse-ld=mold \
 -Wl,-O3,--gc-sections,--as-needed,--icf=all,--exclude-libs=ALL,--pack-dyn-relocs=${PACK_DYN_RELOCS}")
 
 if(NOT CMAKE_C_COMPILER)
-	set(CMAKE_C_COMPILER ${CTARGET}-gcc-16)
-	set(CMAKE_CXX_COMPILER ${CTARGET}-g++-16)
+	set(CMAKE_C_COMPILER ${CTARGET}-gcc)
+	set(CMAKE_CXX_COMPILER ${CTARGET}-g++)
 	set(CMAKE_AR ${CTARGET}-gcc-ar)
 	set(CMAKE_RANLIB ${CTARGET}-gcc-ranlib)
 	set(CMAKE_STRIP ${CTARGET}-strip)
